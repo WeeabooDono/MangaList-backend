@@ -1,0 +1,8 @@
+spring:
+  jpa:
+    database: postgresql
+    show-sql: false
+logging:
+  level:
+    root: INFO
+    fr.weeab.mangalist: INFO

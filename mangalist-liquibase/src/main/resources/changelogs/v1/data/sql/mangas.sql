@@ -1,0 +1,17 @@
+INSERT INTO MANGAS (entity_version, title, description, author, image, created_by, created_date, last_modified_by, last_modified_date)
+VALUES (0, 'test 1', 'description 1', 'author 1', 'path/to/image-1.png', 'liquibase', current_timestamp, null, null),
+       (0, 'test 2', 'description 2', 'author 2', 'path/to/image-2.png', 'liquibase', current_timestamp, null, null),
+       (0, 'test 3', 'description 3', 'author 3', 'path/to/image-3.png', 'liquibase', current_timestamp, null, null),
+       (0, 'test 4', 'description 4', 'author 4', 'path/to/image-4.png', 'liquibase', current_timestamp, null, null),
+       (0, 'test 5', 'description 5', 'author 5', 'path/to/image-5.png', 'liquibase', current_timestamp, null, null),
+       (0, 'test 6', 'description 6', 'author 6', 'path/to/image-6.png', 'liquibase', current_timestamp, null, null),
+       (0, 'test 7', 'description 7', 'author 7', 'path/to/image-7.png', 'liquibase', current_timestamp, null, null),
+       (0, 'test 8', 'description 8', 'author 8', 'path/to/image-8.png', 'liquibase', current_timestamp, null, null),
+       (0, 'test 9', 'description 9', 'author 9', 'path/to/image-9.png', 'liquibase', current_timestamp, null, null),
+       (0, 'test 10', 'description 10', 'author 10', 'path/to/image-10.png', 'liquibase', current_timestamp, null, null),
+       (0, 'test 11', 'description 11', 'author 11', 'path/to/image-11.png', 'liquibase', current_timestamp, null, null),
+       (0, 'test 12', 'description 12', 'author 12', 'path/to/image-12.png', 'liquibase', current_timestamp, null, null),
+       (0, 'test 13', 'description 13', 'author 13', 'path/to/image-13.png', 'liquibase', current_timestamp, null, null),
+       (0, 'test 14', 'description 14', 'author 14', 'path/to/image-14.png', 'liquibase', current_timestamp, null, null),
+       (0, 'test 15', 'description 15', 'author 15', 'path/to/image-15.png', 'liquibase', current_timestamp, null, null),
+       (0, 'test 16', 'description 16', 'author 16', 'path/to/image-16.png', 'liquibase', current_timestamp, null, null);

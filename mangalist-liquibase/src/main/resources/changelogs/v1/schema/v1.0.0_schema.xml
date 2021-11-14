@@ -1,0 +1,46 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="createTableManga" author="MangaList">
+        <comment>[MangaList] Create table Manga</comment>
+        <createTable tableName="mangas">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true"
+                             primaryKeyName="mangas_pk"/>
+            </column>
+            <column name="entity_version" type="INT" defaultValue="0"/>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR"/>
+            <column name="author" type="VARCHAR(255)"/>
+            <column name="image" type="VARCHAR(255)"/>
+            <column name="created_by" type="VARCHAR(50)"/>
+            <column name="created_date" type="TIMESTAMP(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="TIMESTAMP(6)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="createTableGenres" author="MangaList">
+        <comment>[MangaList] Create table Manga</comment>
+        <createTable tableName="genres">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true"
+                             primaryKeyName="genres_pk"/>
+            </column>
+            <column name="entity_version" type="INT" defaultValue="0"/>
+            <column name="name" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="createTableGenreManga" author="MangaList">
+        <comment>[MangaList] Create table Manga</comment>
+        <createTable tableName="genre_manga">
+            <column name="genre_id" type="INT"/>
+            <column name="manga_id" type="INT"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

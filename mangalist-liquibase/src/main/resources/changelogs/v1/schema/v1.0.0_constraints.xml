@@ -1,0 +1,38 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="addUniqueConstraintToMangaTitle" author="MangaList">
+        <comment>[MangaList] Add title unique constraint</comment>
+        <addUniqueConstraint tableName="mangas"
+                             columnNames="title"
+                             constraintName="title_unique"/>
+    </changeSet>
+
+    <changeSet id="addUniqueConstraintToGenreName" author="MangaList">
+        <comment>[MangaList] Add title unique constraint</comment>
+        <addUniqueConstraint tableName="genres"
+                             columnNames="name"
+                             constraintName="name_unique"/>
+    </changeSet>
+
+    <changeSet id="addFkMangasToGenreManga" author="MangaList">
+        <addForeignKeyConstraint baseTableName="genre_manga"
+                                 baseColumnNames="manga_id"
+                                 constraintName="fk_genre_manga__manga_id"
+                                 referencedTableName="mangas"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="addFkGenresToGenreManga" author="MangaList">
+        <addForeignKeyConstraint baseTableName="genre_manga"
+                                 baseColumnNames="genre_id"
+                                 constraintName="fk_genre_manga__genre_id"
+                                 referencedTableName="genres"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,26 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="insertMangas" author="MangaList">
+        <comment>[MangaList] Insert Mangas</comment>
+        <sqlFile relativeToChangelogFile="true"
+                 stripComments="true"
+                 path="sql/mangas.sql"/>
+    </changeSet>
+
+    <changeSet id="insertGenres" author="MangaList">
+        <comment>[MangaList] Insert Genres</comment>
+        <sqlFile relativeToChangelogFile="true"
+                 stripComments="true"
+                 path="sql/genres.sql"/>
+    </changeSet>
+
+    <changeSet id="insertGenreMnaga" author="MangaList">
+        <comment>[MangaList] Insert genre_manga</comment>
+        <sqlFile relativeToChangelogFile="true"
+                 stripComments="true"
+                 path="sql/genre_manga.sql"/>
+    </changeSet>
+</databaseChangeLog>
