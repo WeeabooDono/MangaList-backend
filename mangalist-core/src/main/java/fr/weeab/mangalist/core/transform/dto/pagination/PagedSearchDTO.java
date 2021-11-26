@@ -1,4 +1,4 @@
-package fr.weeab.mangalist.webapp.transform.dto.pagination;
+package fr.weeab.mangalist.core.transform.dto.pagination;
 
 import fr.weeab.mangalist.core.domain.criteria.CriteriaDTO;
 
