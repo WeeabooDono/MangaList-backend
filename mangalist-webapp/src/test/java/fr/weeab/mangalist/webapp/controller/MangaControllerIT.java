@@ -3,10 +3,11 @@ package fr.weeab.mangalist.webapp.controller;
 import fr.weeab.mangalist.core.domain.Manga;
 import fr.weeab.mangalist.core.domain.criteria.MangaCriteriaDTO;
 import fr.weeab.mangalist.core.repository.MangaRepository;
+import fr.weeab.mangalist.core.transform.dto.GenreDTO;
+import fr.weeab.mangalist.core.transform.dto.GenreSaveDTO;
+import fr.weeab.mangalist.core.transform.dto.pagination.PagedSearchDTO;
+import fr.weeab.mangalist.core.transform.dto.pagination.PagerDTO;
 import fr.weeab.mangalist.webapp.context.AbstractIntegrationTest;
-import fr.weeab.mangalist.webapp.transform.dto.GenreDTO;
-import fr.weeab.mangalist.webapp.transform.dto.pagination.PagedSearchDTO;
-import fr.weeab.mangalist.webapp.transform.dto.pagination.PagerDTO;
 import fr.weeab.mangalist.webapp.utils.TestWebappUtils;
 import org.hamcrest.Matchers;
 import org.json.JSONArray;
@@ -171,11 +172,11 @@ public class MangaControllerIT extends AbstractIntegrationTest {
 
         @Test
         void insertManga_shouldReturnInsertedManga() throws Exception {
-            final GenreDTO genre = new GenreDTO();
+            final GenreSaveDTO genre = new GenreSaveDTO();
             genre.setId(1L);
             genre.setName("test_1");
 
-            final Set<GenreDTO> genres = new HashSet<>();
+            final Set<GenreSaveDTO> genres = new HashSet<>();
             genres.add(genre);
 
             final JSONObject json = new JSONObject(ofEntries(

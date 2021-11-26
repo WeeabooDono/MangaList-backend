@@ -8,11 +8,17 @@ import fr.weeab.mangalist.core.repository.GenreRepository;
 import fr.weeab.mangalist.core.repository.MangaRepository;
 import fr.weeab.mangalist.core.repository.specification.MangaSpecification;
 import fr.weeab.mangalist.core.service.MangaService;
+import fr.weeab.mangalist.core.transform.dto.GenreDTO;
+import fr.weeab.mangalist.core.transform.dto.GenreSaveDTO;
+import fr.weeab.mangalist.core.transform.dto.MangaDTO;
+import fr.weeab.mangalist.core.transform.dto.MangaSaveDTO;
+import fr.weeab.mangalist.core.transform.dto.pagination.PagedListDTO;
+import fr.weeab.mangalist.core.transform.dto.pagination.PagerDTO;
+import fr.weeab.mangalist.core.transform.mapper.GenreMapper;
+import fr.weeab.mangalist.core.transform.mapper.MangaMapper;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,36 +29,44 @@ public class MangaServiceImpl implements MangaService {
 
     private final MangaRepository mangaRepository;
     private final GenreRepository genreRepository;
-    private final EntityManager entityManager;
+    final private MangaMapper mangaMapper;
+    final private GenreMapper genreMapper;
 
-    public MangaServiceImpl(MangaRepository mangaRepository, GenreRepository genreRepository, EntityManager entityManager) {
+    public MangaServiceImpl(MangaRepository mangaRepository, GenreRepository genreRepository, MangaMapper mangaMapper, GenreMapper genreMapper) {
         this.mangaRepository = mangaRepository;
         this.genreRepository = genreRepository;
-        this.entityManager = entityManager;
+        this.mangaMapper = mangaMapper;
+        this.genreMapper = genreMapper;
     }
 
-    public Page<Manga> findAll(Pageable pageable) {
-        return this.mangaRepository.findAll(pageable);
+    public PagedListDTO<MangaDTO> findAll(PagerDTO pager) {
+        Page<Manga> mangas = this.mangaRepository.findAll(pager.toPageRequest());
+        return new PagedListDTO<MangaDTO>(this.mangaMapper.toDTOs(mangas.getContent()), mangas.getTotalElements(), pager);
     }
 
-    public Page<Manga> findAllSearched(MangaCriteriaDTO criteria, Pageable pageable) {
-        return this.mangaRepository.findAll(MangaSpecification.getMangasByTitle(criteria), pageable);
+    public PagedListDTO<MangaDTO> findAllSearched(MangaCriteriaDTO criteria, PagerDTO pager) {
+        Page<Manga> mangas = this.mangaRepository.findAll(MangaSpecification.getMangasByTitle(criteria), pager.toPageRequest());
+        return new PagedListDTO<MangaDTO>(this.mangaMapper.toDTOs(mangas.getContent()), mangas.getTotalElements(), pager);
     }
 
-    public Manga findById(Long id) {
-        return this.mangaRepository.findById(id)
+    public MangaDTO findById(Long id) {
+        Manga manga = this.mangaRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(MANGA_NOT_FOUND));
+        return this.mangaMapper.toDTO(manga);
     }
 
-    public Manga save(Manga manga) {
+    public MangaSaveDTO save(MangaDTO dto) {
         // detach genres from entity
         // Get genres by ID in hibernate context to add it and not create it
-        Set<Genre> genres = Set.copyOf(this.genreRepository.findAllById(manga.getGenres()
+        Set<Genre> genres = Set.copyOf(this.genreRepository.findAllById(dto.getGenres()
                 .stream()
-                .map(Genre::getId)
+                .map(GenreSaveDTO::getId)
                 .collect(Collectors.toSet())));
+        Manga manga = this.mangaMapper.toEntity(dto);
         manga.setGenres(genres);
-        return this.mangaRepository.save(manga);
+        this.mangaRepository.save(manga);
+
+        return this.mangaMapper.toDTO(manga);
     }
 
     public Manga update(Long id, Manga entity) {

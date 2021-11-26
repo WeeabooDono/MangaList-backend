@@ -1,18 +1,23 @@
 package fr.weeab.mangalist.core.service;
 
-import fr.weeab.mangalist.core.domain.Manga;
 import fr.weeab.mangalist.core.domain.criteria.MangaCriteriaDTO;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import fr.weeab.mangalist.core.transform.dto.MangaDTO;
+import fr.weeab.mangalist.core.transform.dto.MangaSaveDTO;
+import fr.weeab.mangalist.core.transform.dto.pagination.PagedListDTO;
+import fr.weeab.mangalist.core.transform.dto.pagination.PagerDTO;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
+
+@Validated
 public interface MangaService {
-    Page<Manga> findAll(Pageable pageable);
+    PagedListDTO<MangaDTO> findAll(PagerDTO pager);
 
-    Page<Manga> findAllSearched(MangaCriteriaDTO criteria, Pageable pageable);
+    PagedListDTO<MangaDTO> findAllSearched(MangaCriteriaDTO criteria, PagerDTO pager);
 
-    Manga findById(Long id);
+    MangaDTO findById(Long id);
 
-    Manga save(Manga manga);
+    MangaSaveDTO save(@Valid MangaDTO dto);
 
     void deleteById(Long id);
 }

@@ -1,8 +1,8 @@
 package fr.weeab.mangalist.webapp.utils;
 
 import fr.weeab.mangalist.core.domain.criteria.MangaCriteriaDTO;
-import fr.weeab.mangalist.webapp.transform.dto.pagination.PagedSearchDTO;
-import fr.weeab.mangalist.webapp.transform.dto.pagination.PagerDTO;
+import fr.weeab.mangalist.core.transform.dto.pagination.PagedSearchDTO;
+import fr.weeab.mangalist.core.transform.dto.pagination.PagerDTO;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import java.util.Arrays;

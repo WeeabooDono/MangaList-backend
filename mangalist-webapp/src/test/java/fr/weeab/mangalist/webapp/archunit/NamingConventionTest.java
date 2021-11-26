@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 
-@AnalyzeClasses(packages = "fr.weeab.mangalist", importOptions = { ImportOption.DoNotIncludeTests.class })
+@AnalyzeClasses(packages = "fr.weeab.mangalist", importOptions = {ImportOption.DoNotIncludeTests.class})
 public class NamingConventionTest {
 
     @ArchTest
@@ -31,6 +31,8 @@ public class NamingConventionTest {
     @ArchTest
     static final ArchRule dtosShouldBeSuffixed =
             classes().that().resideInAPackage("..dto..")
-                .should().haveSimpleNameEndingWith("DTO");
+                    .should().haveSimpleNameEndingWith("DTO")
+                    // Car importOptions = {ImportOption.DoNotIncludeTests.class} ne fonctionne pas comme prévu
+                    .orShould().haveSimpleNameEndingWith("DTOTest");
 
 }
